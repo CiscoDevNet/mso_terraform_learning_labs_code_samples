@@ -20,14 +20,11 @@ provider "mso" {
 # Define an MSO Tenant Resource.
 data "mso_tenant" "tenant_obj" {
     name         = var.tenant
-    display_name = var.tenant
 }
 
 # Define an MSO Schema Resource.
 data "mso_schema" "schema_obj" {
-    template_name = "Template1"
     name          = var.schema
-    tenant_id     = data.mso_tenant.tenant_obj.id
 }
 
 # Define an MSO Schema VRF Resource.
@@ -43,8 +40,6 @@ data "mso_schema_template_bd" "bd_obj" {
     schema_id              = data.mso_schema.schema_obj.id
     template_name          = data.mso_schema.schema_obj.template_name
     name                   = var.bd
-    display_name           = var.bd
-    vrf_name               = data.mso_schema_template_vrf.vrf_obj.name
 }
 
 # Define an MSO Contract Resource.
